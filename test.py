@@ -1,26 +1,25 @@
 # import tkinter module
+import os
 from tkinter import *
 from tkinter.ttk import *
-from PIL import Image, ImageTk
-import sys
-import os
-import csv
-import matplotlib.pyplot as plt
-import numpy
+from tkinter import messagebox, filedialog
 
-# creating main tkinter window/toplevel
+
 master = Tk()
 master.title("Base")
+
+
 
 def open():
     global my_image
     global pp
-    root.filename = filedialog.askopenfilename(initialdir="/Users/andrewjblue/PycharmProjects/giraffe3/metrology", title="Select a file", filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
-    pp = root.filename
-    # TODO populate e1 with file location
+    master.filename = filedialog.askopenfilename(title="Select a file", filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
+    pp = master.filename
+    # het filename from location
+    pp_filename = os.path.basename(pp)
+    # populate e1 with file location
+    e1.insert(0, pp_filename)
 
-    # pp_label = Label(root, text=pp)
-    # pp_label.grid(row=4, column=0, columnspan=2, padx=20, pady=(10, 0))
     return
 
 def process():
@@ -52,12 +51,16 @@ Label(master, image=img1).grid(row=0, column=2,
                                columnspan=2, rowspan=2, padx=5, pady=5)
 
 # button widget
-b1 = Button(master, text="Choose File")
-b2 = Button(master, text="Process")
+b1 = Button(master, text="Choose File", command=open)
+b2 = Button(master, text="Process", command=process)
+b3 = Button(master, text="Quit", command=quit)
+
 
 # arranging button widgets
 b1.grid(row=1, column=0, sticky=E)
-b2.grid(row=1, column=1, sticky=E)
+b2.grid(row=1, column=1, sticky=W)
+b3.grid(row=2, column=3, sticky=E)
+
 
 
 mainloop()
