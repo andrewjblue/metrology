@@ -4,21 +4,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 root = Tk()
 root.title("Plotting")
-import pandas as pd
-
-def graph():
-    #house_prices =np.random.normal(200000, 25000, 5000)
-    #plt.hist(house_prices, bins=50)
-    df = pd.read_csv('metrology/tr.csv')
-    hist_plot = df['z'].hist(bins =100)
-    hist_plot.set_title('X height Histo')
-    hist_plot.set_xlabel('Z height (um)')
-    hist_plot.set_ylabel('Counts')
-    hist_plot.plot()
-    plt.show()
-
-my_btn= Button(root, text = 'graph', command=graph)
-my_btn.pack()
 
 
-root.mainloop()
+def f(x, y):
+    return np.sin(np.sqrt(x ** 2 + y ** 2))
+
+x = np.linspace(-6, 6, 30)
+y = np.linspace(-6, 6, 30)
+X, Y = np.meshgrid(x, y)
+Z = f(X, Y)
+
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+ax.contour3D(X, Y, Z, 50, cmap='binary')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z');
+plt.show(block=True)
