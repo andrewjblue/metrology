@@ -3,6 +3,9 @@ import os
 from tkinter import *
 from tkinter.ttk import *
 from tkinter import messagebox, filedialog
+import matplotlib.pyplot as plt
+import pandas as pd
+
 
 
 master = Tk()
@@ -23,9 +26,14 @@ def open():
     return
 
 def process():
-    os.system('python z_data.py ' + pp)
-
-
+    # os.system('python z_data.py ' + pp)
+        df = pd.read_csv(pp)
+        hist_plot = df['z'].hist(bins=100)
+        hist_plot.set_title('X height Histo')
+        hist_plot.set_xlabel('Z height (um)')
+        hist_plot.set_ylabel('Counts')
+        hist_plot.plot()
+        plt.show()
 
 # this will create a label widget
 l1 = Label(master, text="CSV File path")
