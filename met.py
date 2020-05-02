@@ -44,5 +44,51 @@ json_btn.grid(row=5, column=1, pady=(10, 0))
 quit_btn=Button(root, text="Quit", command=quit)
 quit_btn.grid(row=6, column=1, pady=(10, 0))
 
+
+creating main tkinter window/toplevel
+master = Tk()
+master.title("Base")
+
+
+# this will create a label widget
+l1 = Label(master, text="CSV File path")
+l2 = Label(master, text="Width")
+
+# grid method to arrange labels in respective
+# rows and columns as specified
+l1.grid(row=0, column=0, sticky=W, pady=2)
+#l2.grid(row=1, column=0, sticky=W, pady=2)
+
+# entry widgets, used to take entry from user
+e1 = Entry(master)
+e2 = Entry(master)
+
+# this will arrange entry widgets
+e1.grid(row=0, column=1, pady=2)
+#e2.grid(row=1, column=1, pady=2)
+
+
+
+# adding image (remember image should be PNG and not JPG)
+img = PhotoImage(file=r"logo.png")
+img1 = img.subsample(1, 1)
+
+# setting image with the help of label
+Label(master, image=img1).grid(row=0, column=2,
+                               columnspan=2, rowspan=2, padx=5, pady=5)
+
+# button widget
+b1 = Button(master, text="Choose File")
+b2 = Button(master, text="Process")
+
+# arranging button widgets
+b1.grid(row=2, column=0, sticky=E)
+b2.grid(row=2, column=1, sticky=E)
+
+
+mainloop()
+
+
+
 mainloop()
 
