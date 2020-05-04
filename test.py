@@ -2,41 +2,36 @@
 import os
 from tkinter import *
 from tkinter.ttk import *
-from tkinter import messagebox, filedialog
+from tkinter import filedialog
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 
 master = Tk()
 master.title("Base")
 
-
 def open():
+
     global my_image
     global pp
     master.filename = filedialog.askopenfilename(title="Select a file",
                                                  filetypes=(("csv files", "*.csv"), ("all files", "*.*")))
     pp = master.filename
-    # het filename from location
     pp_filename = os.path.basename(pp)
-    # populate e1 with file location
     e1.insert(0, pp_filename)
 
     return
 
 
 def process_h():
-    # os.system('python z_data.py ' + pp)
     df = pd.read_csv(pp)
     hist_plot = df['z'].hist(bins=100)
-    hist_plot.set_title('X height Histo')
-    hist_plot.set_xlabel('Z height (um)')
+    hist_plot.set_title('Z height Histogram')
+    hist_plot.set_xlabel('Z height (microns)')
     hist_plot.set_ylabel('Counts')
     hist_plot.plot()
     plt.show()
 
 def process_s():
-
     df = pd.read_csv(pp)
     X = df['x']
     Y = df['y']
@@ -46,6 +41,7 @@ def process_s():
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
     ax.plot_trisurf(X, Y, Z, color='white', edgecolors='grey', alpha=0.5)
+    ax.set_title('Surface Plot')
     ax.scatter(X, Y, Z, c='red')
     plt.show()
 
@@ -77,19 +73,10 @@ b5 = Button(master, text="Surface Plot", command=process_s)
 b3 = Button(master, text="Quit", command=quit)
 
 
-def home(self):
-    btn = QPushButton('quit', self)
-    btn.clicked.connect(QCoreApplication.instance().quit)
-    btn.resize(100, 100)
-    btn.move(100, 100)
-    self.show()
-
-
 # arranging button widgets
 b1.grid(row=1, column=0, columnspan=3, sticky=W)
 b2.grid(row=2, column=0, sticky=E)
 b3.grid(row=2, column=3, sticky=E)
 b5.grid(row=2, column=1, sticky=W)
-
 
 mainloop()
