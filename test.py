@@ -74,6 +74,7 @@ def processx():
     average_z = []
     for i in range(len(tot_actual_z), 4, 5):
         average_z.append(np.mean(tot_actual_z[i:(i + 5)]))
+    print(average_z)
     plt.figure(1)
     plt.plot(average_z)
     plt.xlabel('Asic position')
